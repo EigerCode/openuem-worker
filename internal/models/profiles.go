@@ -12,7 +12,7 @@ import (
 )
 
 func (m *Model) GetProfilesAppliedToAll(siteID int) ([]*ent.Profile, error) {
-	return m.Client.Profile.Query().WithTasks().Where(profile.ApplyToAll(true), profile.HasSiteWith(site.ID(siteID))).All(context.Background())
+	return m.Client.Profile.Query().WithTasks().Where(profile.DisabledEQ(false), profile.ApplyToAll(true), profile.HasSiteWith(site.ID(siteID))).All(context.Background())
 }
 
 func (m *Model) GetProfilesAppliedToAgent(siteID int, agentID string) ([]*ent.Profile, error) {
@@ -28,7 +28,7 @@ func (m *Model) GetProfilesAppliedToAgent(siteID int, agentID string) ([]*ent.Pr
 			tags = append(tags, tag.ID)
 		}
 
-		return m.Client.Profile.Query().WithTasks().Where(profile.HasTagsWith(tag.IDIn(tags...)), profile.HasSiteWith(site.ID(siteID))).All(context.Background())
+		return m.Client.Profile.Query().WithTasks().Where(profile.DisabledEQ(false), profile.HasTagsWith(tag.IDIn(tags...)), profile.HasSiteWith(site.ID(siteID))).All(context.Background())
 	}
 
 	return []*ent.Profile{}, nil
