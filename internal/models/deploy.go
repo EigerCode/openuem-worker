@@ -5,9 +5,9 @@ import (
 	"log"
 	"strings"
 
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/deployment"
-	"github.com/open-uem/ent/wingetconfigexclusion"
+	"github.com/EigerCode/ent/agent"
+	"github.com/EigerCode/ent/deployment"
+	"github.com/EigerCode/ent/wingetconfigexclusion"
 	"github.com/open-uem/nats"
 )
 

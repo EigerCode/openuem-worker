@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/open-uem/openuem-worker/internal/commands"
+	"github.com/EigerCode/openuem-worker/internal/commands"
 	"github.com/urfave/cli/v2"
 )
 

@@ -3,7 +3,7 @@ package models
 import (
 	"context"
 
-	"github.com/open-uem/ent/user"
+	"github.com/EigerCode/ent/user"
 	"github.com/open-uem/nats"
 )
 

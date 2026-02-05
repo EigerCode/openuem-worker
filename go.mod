@@ -1,17 +1,17 @@
-module github.com/open-uem/openuem-worker
+module github.com/EigerCode/openuem-worker
 
 go 1.25.5
 
 require (
 	entgo.io/ent v0.14.5
+	github.com/EigerCode/ent v0.0.0-00010101000000-000000000000
+	github.com/EigerCode/utils v0.0.0-00010101000000-000000000000
 	github.com/a-h/templ v0.3.943
 	github.com/go-co-op/gocron/v2 v2.17.0
 	github.com/jackc/pgx/v5 v5.7.6
 	github.com/nats-io/nats.go v1.47.0
-	github.com/open-uem/ent v0.0.0-20260121160055-142eb8d57a27
 	github.com/open-uem/nats v0.0.0-20251220104614-efae26e98557
 	github.com/open-uem/openuem-ansible-config v0.0.0-20250710075757-9ef6e3390073
-	github.com/open-uem/utils v0.0.0-20251221104611-c55d64529212
 	github.com/open-uem/wingetcfg v0.0.0-20251011111407-80e823d91ea5
 	github.com/urfave/cli/v2 v2.27.7
 	github.com/wneessen/go-mail v0.7.2
@@ -52,3 +52,7 @@ require (
 	golang.org/x/text v0.30.0 // indirect
 	golang.org/x/tools v0.38.0 // indirect
 )
+
+replace github.com/EigerCode/ent => ../ent
+
+replace github.com/EigerCode/utils => ../utils

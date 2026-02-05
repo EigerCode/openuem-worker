@@ -11,11 +11,11 @@ import (
 	"strings"
 
 	"github.com/nats-io/nats.go"
-	"github.com/open-uem/ent"
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/task"
+	"github.com/EigerCode/ent"
+	"github.com/EigerCode/ent/agent"
+	"github.com/EigerCode/ent/task"
 	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/utils"
+	"github.com/EigerCode/utils"
 	"github.com/open-uem/wingetcfg/wingetcfg"
 
 	ansiblecfg "github.com/open-uem/openuem-ansible-config/ansible"

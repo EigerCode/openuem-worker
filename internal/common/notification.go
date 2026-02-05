@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/nats-io/nats.go"
-	"github.com/open-uem/ent"
+	"github.com/EigerCode/ent"
 	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-worker/internal/common/notifications"
+	"github.com/EigerCode/openuem-worker/internal/common/notifications"
 )
 
 func (w *Worker) SendConfirmEmailHandler(msg *nats.Msg) {

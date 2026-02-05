@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/open-uem/ent"
-	"github.com/open-uem/ent/enrollmenttoken"
+	"github.com/EigerCode/ent"
+	"github.com/EigerCode/ent/enrollmenttoken"
 )
 
 // ValidateEnrollmentToken validates an enrollment token and returns the associated tenant/site IDs

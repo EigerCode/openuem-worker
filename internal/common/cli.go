@@ -4,7 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/open-uem/utils"
+	"github.com/EigerCode/utils"
 	"github.com/urfave/cli/v2"
 )
 

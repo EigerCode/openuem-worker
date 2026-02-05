@@ -3,9 +3,9 @@ package models
 import (
 	"context"
 
-	"github.com/open-uem/ent"
-	"github.com/open-uem/ent/netbirdsettings"
-	"github.com/open-uem/ent/tenant"
+	"github.com/EigerCode/ent"
+	"github.com/EigerCode/ent/netbirdsettings"
+	"github.com/EigerCode/ent/tenant"
 )
 
 func (m *Model) GetNetbirdSettings(tenantID int) (*ent.NetbirdSettings, error) {

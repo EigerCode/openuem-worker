@@ -3,12 +3,12 @@ package models
 import (
 	"context"
 
-	"github.com/open-uem/ent"
-	"github.com/open-uem/ent/agent"
-	"github.com/open-uem/ent/profile"
-	"github.com/open-uem/ent/profileissue"
-	"github.com/open-uem/ent/site"
-	"github.com/open-uem/ent/tag"
+	"github.com/EigerCode/ent"
+	"github.com/EigerCode/ent/agent"
+	"github.com/EigerCode/ent/profile"
+	"github.com/EigerCode/ent/profileissue"
+	"github.com/EigerCode/ent/site"
+	"github.com/EigerCode/ent/tag"
 )
 
 func (m *Model) GetProfilesAppliedToAll(siteID int) ([]*ent.Profile, error) {

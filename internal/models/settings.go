@@ -4,9 +4,9 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/open-uem/ent"
-	"github.com/open-uem/ent/settings"
-	"github.com/open-uem/ent/tenant"
+	"github.com/EigerCode/ent"
+	"github.com/EigerCode/ent/settings"
+	"github.com/EigerCode/ent/tenant"
 )
 
 func (m *Model) GetSettings(t string) (*ent.Settings, error) {

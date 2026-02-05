@@ -16,10 +16,10 @@ import (
 	"time"
 
 	"github.com/nats-io/nats.go"
-	"github.com/open-uem/ent/certificate"
+	"github.com/EigerCode/ent/certificate"
 
 	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/utils"
+	"github.com/EigerCode/utils"
 	"software.sslmate.com/src/go-pkcs12"
 )
 

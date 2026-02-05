@@ -3,7 +3,7 @@ package common
 import (
 	"log"
 
-	"github.com/open-uem/ent"
+	"github.com/EigerCode/ent"
 )
 
 func (w *Worker) SubscribeToNotificationWorkerQueues() error {

@@ -10,11 +10,11 @@ import (
 	"github.com/go-co-op/gocron/v2"
 	"github.com/nats-io/nats.go"
 	"github.com/nats-io/nats.go/jetstream"
-	"github.com/open-uem/ent"
-	"github.com/open-uem/ent/server"
+	"github.com/EigerCode/ent"
+	"github.com/EigerCode/ent/server"
 	openuem_nats "github.com/open-uem/nats"
-	"github.com/open-uem/openuem-worker/internal/models"
-	"github.com/open-uem/utils"
+	"github.com/EigerCode/openuem-worker/internal/models"
+	"github.com/EigerCode/utils"
 )
 
 type Worker struct {

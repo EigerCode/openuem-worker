@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/open-uem/ent"
+	"github.com/EigerCode/ent"
 	"github.com/open-uem/nats"
 	"github.com/wneessen/go-mail"
 )

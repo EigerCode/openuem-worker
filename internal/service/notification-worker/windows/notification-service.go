@@ -6,8 +6,8 @@ import (
 	"log"
 
 	"github.com/go-co-op/gocron/v2"
-	"github.com/open-uem/openuem-worker/internal/common"
-	"github.com/open-uem/utils"
+	"github.com/EigerCode/openuem-worker/internal/common"
+	"github.com/EigerCode/utils"
 	"golang.org/x/sys/windows/svc"
 )
 
