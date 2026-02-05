@@ -4,8 +4,8 @@ go 1.25.5
 
 require (
 	entgo.io/ent v0.14.5
-	github.com/EigerCode/ent v0.0.0-00010101000000-000000000000
-	github.com/EigerCode/utils v0.0.0-00010101000000-000000000000
+	github.com/EigerCode/ent v0.0.0-20260204201821-ec41271a60aa
+	github.com/EigerCode/utils v0.0.0-20260203190441-952c72a58011
 	github.com/a-h/templ v0.3.943
 	github.com/go-co-op/gocron/v2 v2.17.0
 	github.com/jackc/pgx/v5 v5.7.6
@@ -52,7 +52,3 @@ require (
 	golang.org/x/text v0.30.0 // indirect
 	golang.org/x/tools v0.38.0 // indirect
 )
-
-replace github.com/EigerCode/ent => ../ent
-
-replace github.com/EigerCode/utils => ../utils
