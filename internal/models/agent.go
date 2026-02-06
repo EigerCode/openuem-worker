@@ -32,7 +32,7 @@ import (
 	"github.com/EigerCode/ent/systemupdate"
 	"github.com/EigerCode/ent/tenant"
 	"github.com/EigerCode/ent/update"
-	"github.com/open-uem/nats"
+	"github.com/EigerCode/nats"
 	"github.com/EigerCode/utils"
 )
 

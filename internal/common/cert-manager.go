@@ -18,7 +18,7 @@ import (
 	"github.com/nats-io/nats.go"
 	"github.com/EigerCode/ent/certificate"
 
-	openuem_nats "github.com/open-uem/nats"
+	openuem_nats "github.com/EigerCode/nats"
 	"github.com/EigerCode/utils"
 	"software.sslmate.com/src/go-pkcs12"
 )

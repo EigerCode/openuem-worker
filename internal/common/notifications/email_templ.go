@@ -8,7 +8,7 @@ package notifications
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/open-uem/nats"
+import "github.com/EigerCode/nats"
 
 func EmailTemplate(notification *nats.Notification) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {

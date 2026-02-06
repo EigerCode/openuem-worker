@@ -8,7 +8,7 @@ import (
 	"github.com/EigerCode/ent/agent"
 	"github.com/EigerCode/ent/deployment"
 	"github.com/EigerCode/ent/wingetconfigexclusion"
-	"github.com/open-uem/nats"
+	"github.com/EigerCode/nats"
 )
 
 func (m *Model) SaveDeployInfo(data *nats.DeployAction) error {

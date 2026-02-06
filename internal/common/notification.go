@@ -7,7 +7,7 @@ import (
 
 	"github.com/nats-io/nats.go"
 	"github.com/EigerCode/ent"
-	openuem_nats "github.com/open-uem/nats"
+	openuem_nats "github.com/EigerCode/nats"
 	"github.com/EigerCode/openuem-worker/internal/common/notifications"
 )
 

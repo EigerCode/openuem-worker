@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/EigerCode/ent"
-	"github.com/open-uem/nats"
+	"github.com/EigerCode/nats"
 	"github.com/wneessen/go-mail"
 )
 

@@ -12,7 +12,7 @@ import (
 	"github.com/nats-io/nats.go/jetstream"
 	"github.com/EigerCode/ent"
 	"github.com/EigerCode/ent/server"
-	openuem_nats "github.com/open-uem/nats"
+	openuem_nats "github.com/EigerCode/nats"
 	"github.com/EigerCode/openuem-worker/internal/models"
 	"github.com/EigerCode/utils"
 )

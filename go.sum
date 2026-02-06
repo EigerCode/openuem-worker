@@ -6,6 +6,8 @@ github.com/DATA-DOG/go-sqlmock v1.5.0 h1:Shsta01QNfFxHCfpW6YH2STWB0MudeXXEWMr20O
 github.com/DATA-DOG/go-sqlmock v1.5.0/go.mod h1:f/Ixk793poVmq4qj/V1dPUg2JEAKC73Q5eFN3EC/SaM=
 github.com/EigerCode/ent v0.0.0-20260204201821-ec41271a60aa h1:lPl5zx829WSl6/QBFJrsu8WXh9uFLsrHPpdmFmYMgFU=
 github.com/EigerCode/ent v0.0.0-20260204201821-ec41271a60aa/go.mod h1:b3oM6WOk/nufQQEAnqcuHgWsFYhGBavzButv6UeGBO0=
+github.com/EigerCode/nats v0.0.0-20260206062853-cc49ece03788 h1:y+0SWDnuEQNrwzSPH0AEWIBTqnT90zfRRUYXLVoCqmk=
+github.com/EigerCode/nats v0.0.0-20260206062853-cc49ece03788/go.mod h1:nHZ8UvMJr9ylI3vggrnWM30wgPhXst7kqFUvAHO+vzk=
 github.com/EigerCode/utils v0.0.0-20260203190441-952c72a58011 h1:OdDtMDcnE51u0p/Hf+Z6YC4Fh3yoChCVSDqAWKAwefI=
 github.com/EigerCode/utils v0.0.0-20260203190441-952c72a58011/go.mod h1:ys+MNvo0YSK14ZQe2MmKjvmweKPHMmPKk2B4rSyLncs=
 github.com/a-h/templ v0.3.943 h1:o+mT/4yqhZ33F3ootBiHwaY4HM5EVaOJfIshvd5UNTY=
@@ -61,8 +63,6 @@ github.com/nats-io/nkeys v0.4.11 h1:q44qGV008kYd9W1b1nEBkNzvnWxtRSQ7A8BoqRrcfa0=
 github.com/nats-io/nkeys v0.4.11/go.mod h1:szDimtgmfOi9n25JpfIdGw12tZFYXqhGxjhVxsatHVE=
 github.com/nats-io/nuid v1.0.1 h1:5iA8DT8V7q8WK2EScv2padNa/rTESc1KdnPw4TC2paw=
 github.com/nats-io/nuid v1.0.1/go.mod h1:19wcPz3Ph3q0Jbyiqsd0kePYG7A95tJPxeL+1OSON2c=
-github.com/open-uem/nats v0.0.0-20251220104614-efae26e98557 h1:8NjsYRfNX0Annr26ln7rnjRqg8nHBf7ns9PzecfRJsw=
-github.com/open-uem/nats v0.0.0-20251220104614-efae26e98557/go.mod h1:chcBtTU0QNmPvWecVPVlGe5LcEBHevv1Ee+ye8AnLAg=
 github.com/open-uem/openuem-ansible-config v0.0.0-20250710075757-9ef6e3390073 h1:CyRpBJD7i2oAvHh3d5ncFBh5UGepj2Yd0TEpbhR53Sw=
 github.com/open-uem/openuem-ansible-config v0.0.0-20250710075757-9ef6e3390073/go.mod h1:mCdYkT1RTq4V3Ai6TjIfy7QoX68lhpLoF63+YXpPXFI=
 github.com/open-uem/wingetcfg v0.0.0-20251011111407-80e823d91ea5 h1:LQ6pwsgumUBcuw7cPy66jmLE/ZaIvbCZRGxcOFFkF24=

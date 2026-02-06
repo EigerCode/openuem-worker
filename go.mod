@@ -5,12 +5,12 @@ go 1.25.5
 require (
 	entgo.io/ent v0.14.5
 	github.com/EigerCode/ent v0.0.0-20260204201821-ec41271a60aa
+	github.com/EigerCode/nats v0.0.0-20260206062853-cc49ece03788
 	github.com/EigerCode/utils v0.0.0-20260203190441-952c72a58011
 	github.com/a-h/templ v0.3.943
 	github.com/go-co-op/gocron/v2 v2.17.0
 	github.com/jackc/pgx/v5 v5.7.6
 	github.com/nats-io/nats.go v1.47.0
-	github.com/open-uem/nats v0.0.0-20251220104614-efae26e98557
 	github.com/open-uem/openuem-ansible-config v0.0.0-20250710075757-9ef6e3390073
 	github.com/open-uem/wingetcfg v0.0.0-20251011111407-80e823d91ea5
 	github.com/urfave/cli/v2 v2.27.7

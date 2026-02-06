@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/EigerCode/ent/user"
-	"github.com/open-uem/nats"
+	"github.com/EigerCode/nats"
 )
 
 func (m *Model) SetCertificateSent(uid string) error {

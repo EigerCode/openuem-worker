@@ -14,7 +14,7 @@ import (
 	"github.com/EigerCode/ent"
 	"github.com/EigerCode/ent/agent"
 	"github.com/EigerCode/ent/task"
-	openuem_nats "github.com/open-uem/nats"
+	openuem_nats "github.com/EigerCode/nats"
 	"github.com/EigerCode/utils"
 	"github.com/open-uem/wingetcfg/wingetcfg"
 
