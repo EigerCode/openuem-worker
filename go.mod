@@ -19,6 +19,7 @@ require (
 	golang.org/x/sys v0.37.0
 	gopkg.in/ini.v1 v1.67.0
 	gopkg.in/yaml.v3 v3.0.1
+	howett.net/plist v1.0.1
 	software.sslmate.com/src/go-pkcs12 v0.6.0
 )
 
@@ -52,3 +53,9 @@ require (
 	golang.org/x/text v0.30.0 // indirect
 	golang.org/x/tools v0.38.0 // indirect
 )
+
+replace github.com/open-uem/ent => ../ent
+
+replace github.com/open-uem/nats => ../nats
+
+replace github.com/open-uem/utils => ../utils

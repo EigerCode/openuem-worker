@@ -85,6 +85,28 @@ func (w *Worker) SubscribeToAgentWorkerQueues() error {
 		return err
 	}
 	log.Printf("[INFO]: subscribed to message wingetcfg.report")
+
+	_, err = w.NATSConnection.QueueSubscribe("nanohub.deviceinfo", "openuem-agents", w.NanoHubDeviceInfoHandler)
+	if err != nil {
+		log.Printf("[ERROR]: could not subscribe to nanohub.deviceinfo NATS message, reason: %v", err)
+		return err
+	}
+	log.Printf("[INFO]: subscribed to message nanohub.deviceinfo")
+
+	_, err = w.NATSConnection.QueueSubscribe("nanohub.installedapplicationslist", "openuem-agents", w.NanoHubInstalledApplicationListHandler)
+	if err != nil {
+		log.Printf("[ERROR]: could not subscribe to nanohub.installedapplicationslist NATS message, reason: %v", err)
+		return err
+	}
+	log.Printf("[INFO]: subscribed to message nanohub.installedapplicationslist")
+
+	_, err = w.NATSConnection.QueueSubscribe("nanohub.userslist", "openuem-agents", w.NanoHubUsersListHandler)
+	if err != nil {
+		log.Printf("[ERROR]: could not subscribe to nanohub.userslist NATS message, reason: %v", err)
+		return err
+	}
+	log.Printf("[INFO]: subscribed to message nanohub.userslist")
+
 	return nil
 }
 
@@ -222,8 +244,6 @@ func (w *Worker) ApplyWindowsEndpointProfiles(msg *nats.Msg) {
 	configurations := []openuem_nats.ProfileConfig{}
 	profileRequest := openuem_nats.CfgProfiles{}
 
-	// log.Println("[DEBUG]: received a wingetcfg.profiles message")
-
 	// Unmarshal data and get agentID
 	if err := json.Unmarshal(msg.Data, &profileRequest); err != nil {
 		log.Println("[ERROR]: could not unmarshall profile request")
@@ -236,47 +256,12 @@ func (w *Worker) ApplyWindowsEndpointProfiles(msg *nats.Msg) {
 		return
 	}
 
-	// log.Println("[DEBUG]: received a wingetcfg.profiles message for: ", profileRequest.AgentID)
-
 	// Get profiles that should apply to this agent
 	profiles, err := w.GetAppliedProfiles(profileRequest.AgentID)
 	if err != nil {
 		log.Printf("[ERROR]: could not get applied profiles, reason: %v", err)
 		return
 	}
-
-	// Alternative: the agent worker is going to check for excluded packages
-	// deployments, err := w.Model.GetDeployedPackages(profileRequest.AgentID)
-	// if err != nil {
-	// 	log.Printf("[ERROR]: could not get deployed packages with WinGet, reason: %v", err)
-	// 	return
-	// }
-
-	// installedApps, err := w.Model.GetAgentApps(profileRequest.AgentID)
-	// if err != nil {
-	// 	log.Printf("[ERROR]: could not get apps installed reported by the agent, reason: %v", err)
-	// 	return
-	// }
-
-	// // Check if a deployed app with winget has been uninstalled in the endpoint
-	// for _, d := range deployments {
-	// 	installed := false
-	// 	for _, app := range installedApps {
-	// 		if d.Name == app.Name {
-	// 			installed = true
-	// 			break
-	// 		}
-	// 	}
-	// 	if !installed {
-	// 		// We must remove it from our deployments and also add it to the exclusion list
-	// 		data := openuem_nats.DeployAction{}
-	// 		data.AgentId = profileRequest.AgentID
-	// 		data.PackageId = d.PackageID
-	// 		if err := w.Model.MarkPackageAsExcluded(data); err != nil {
-	// 			log.Printf("[ERROR]: could not set package %s as excluded, reason: %v", d.PackageID, err)
-	// 		}
-	// 	}
-	// }
 
 	// Now inform which packages has been excluded to the agent
 	exclusions, err := w.Model.GetExcludedWinGetPackages(profileRequest.AgentID)
@@ -323,13 +308,9 @@ func (w *Worker) ApplyWindowsEndpointProfiles(msg *nats.Msg) {
 		log.Printf("[ERROR]: could not marshal configurations, reason: %v", err)
 	}
 
-	// log.Println("[DEBUG]: going to respond wingetcfg.profiles message for: ", profileRequest.AgentID)
-
 	if err := msg.Respond(data); err != nil {
 		log.Printf("[ERROR]: could not send wingetcfg message with profiles to the agent, reason: %v\n", err)
 	}
-
-	// log.Println("[DEBUG]: should have responded to wingetcfg.profiles message for: ", profileRequest.AgentID)
 }
 
 func (w *Worker) ApplyUnixEndpointProfiles(msg *nats.Msg) {
@@ -796,14 +777,10 @@ func (w *Worker) GenerateNetbirdConfig(profile *ent.Profile, agentID string) ([]
 func (w *Worker) WinGetCfgDeploymentReport(msg *nats.Msg) {
 	deploy := openuem_nats.DeployAction{}
 
-	// log.Println("[DEBUG]: received a wingetcfg.deploy message")
-
 	// Unmarshal data and get agentID
 	if err := json.Unmarshal(msg.Data, &deploy); err != nil {
 		log.Println("[ERROR]: could not unmarshall WinGetCfg deployment action report from agent")
 	}
-
-	// log.Printf("[DEBUG]: deplou info: %v", deploy)
 
 	if err := w.Model.SaveWinGetDeployInfo(deploy); err != nil {
 		log.Printf("[ERROR]: could not save WinGetCfg deployment action report from agent, reason: %v", err)
@@ -812,14 +789,10 @@ func (w *Worker) WinGetCfgDeploymentReport(msg *nats.Msg) {
 	if err := msg.Respond(nil); err != nil {
 		log.Printf("[ERROR]: could not respond to WinGetCfg deployment action report, reason: %v\n", err)
 	}
-
-	// log.Println("[DEBUG]: should have responded to wingetcfg.deploy message")
 }
 
 func (w *Worker) WinGetCfgMarkPackageAsExcluded(msg *nats.Msg) {
 	deploy := openuem_nats.DeployAction{}
-
-	// log.Println("[DEBUG]: received a wingetcfg.deploy message")
 
 	if err := json.Unmarshal(msg.Data, &deploy); err != nil {
 		log.Println("[ERROR]: could not unmarshall WinGetCfg deployment action report from agent")
@@ -832,21 +805,15 @@ func (w *Worker) WinGetCfgMarkPackageAsExcluded(msg *nats.Msg) {
 	if err := msg.Respond(nil); err != nil {
 		log.Printf("[ERROR]: could not respond to WinGetCfg deployment action report, reason: %v\n", err)
 	}
-
-	// log.Println("[DEBUG]: should have responded to wingetcfg.deploy message")
 }
 
 func (w *Worker) WinGetCfgApplicationReport(msg *nats.Msg) {
 	report := openuem_nats.WingetCfgReport{}
 
-	// log.Println("[DEBUG]: received a wingetcfg.report message")
-
 	// Unmarshal data
 	if err := json.Unmarshal(msg.Data, &report); err != nil {
 		log.Println("[ERROR]: could not unmarshall WinGetCfg report from agent")
 	}
-
-	// log.Printf("[DEBUG]: wingetcfg.report data, %v", report)
 
 	if err := w.Model.SaveProfileApplicationIssues(report.ProfileID, report.AgentID, report.Success, report.Error); err != nil {
 		log.Printf("[ERROR]: could not save WinGetCfg profile issue, reason: %v", err)
@@ -855,6 +822,4 @@ func (w *Worker) WinGetCfgApplicationReport(msg *nats.Msg) {
 	if err := msg.Respond(nil); err != nil {
 		log.Printf("[ERROR]: could not respond to WinGetCfg report, reason: %v\n", err)
 	}
-
-	// log.Println("[DEBUG]: should have responded to wingetcfg.report message")
 }
