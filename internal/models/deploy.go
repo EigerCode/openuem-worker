@@ -19,40 +19,94 @@ func (m *Model) SaveDeployInfo(data *nats.DeployAction) error {
 
 	if data.Action == "install" {
 		if exists {
-			return m.Client.Deployment.Update().
+			query := m.Client.Deployment.Update().
 				SetInstalled(data.When).
 				SetUpdated(data.When).
 				SetFailed(data.Failed).
-				Where(deployment.And(deployment.PackageID(data.PackageId), deployment.HasOwnerWith(agent.ID(data.AgentId)))).
-				Exec(context.Background())
+				SetMoreInfo(data.Info)
+
+			if data.PackageBranch != "" {
+				query.SetBranch(data.PackageBranch)
+			}
+
+			if data.PackageBrewType != "" {
+				query.SetBrewType(data.PackageBrewType)
+			}
+
+			if data.PackageVerified {
+				query.SetVerified(data.PackageVerified)
+			}
+
+			return query.Where(deployment.And(deployment.PackageID(data.PackageId), deployment.HasOwnerWith(agent.ID(data.AgentId)))).Exec(context.Background())
 		} else {
-			return m.Client.Deployment.Create().
+			query := m.Client.Deployment.Create().
 				SetName(data.PackageName).
 				SetOwnerID(data.AgentId).
 				SetPackageID(data.PackageId).
 				SetInstalled(data.When).
 				SetUpdated(data.When).
 				SetFailed(data.Failed).
-				Exec(context.Background())
-		}
+				SetMoreInfo(data.Info)
 
+			if data.PackageBranch != "" {
+				query.SetBranch(data.PackageBranch)
+			}
+
+			if data.PackageBrewType != "" {
+				query.SetBrewType(data.PackageBrewType)
+			}
+
+			if data.PackageVerified {
+				query.SetVerified(data.PackageVerified)
+			}
+
+			return query.Exec(context.Background())
+		}
 	}
 
 	if data.Action == "update" {
 		if exists {
-			return m.Client.Deployment.Update().
+			query := m.Client.Deployment.Update().
 				SetUpdated(data.When).
-				SetFailed(data.Failed).
+				SetFailed(data.Failed)
+
+			if data.PackageBranch != "" {
+				query.SetBranch(data.PackageBranch)
+			}
+
+			if data.PackageBrewType != "" {
+				query.SetBrewType(data.PackageBrewType)
+			}
+
+			if data.PackageVerified {
+				query.SetVerified(data.PackageVerified)
+			}
+
+			return query.
 				Where(deployment.And(deployment.PackageID(data.PackageId), deployment.HasOwnerWith(agent.ID(data.AgentId)))).
 				Exec(context.Background())
 		} else {
-			return m.Client.Deployment.Update().
+			query := m.Client.Deployment.Update().
 				SetName(data.PackageName).
 				SetOwnerID(data.AgentId).
 				SetPackageID(data.PackageId).
 				SetInstalled(data.When).
 				SetUpdated(data.When).
-				SetFailed(data.Failed).
+				SetFailed(data.Failed)
+
+			if data.PackageBranch != "" {
+				query.SetBranch(data.PackageBranch)
+			}
+
+			if data.PackageBrewType != "" {
+				query.SetBrewType(data.PackageBrewType)
+			}
+
+			if data.PackageVerified {
+				query.SetVerified(data.PackageVerified)
+			}
+
+			return query.
 				Where(deployment.And(deployment.PackageID(data.PackageId), deployment.HasOwnerWith(agent.ID(data.AgentId)))).
 				Exec(context.Background())
 		}
@@ -65,11 +119,24 @@ func (m *Model) SaveDeployInfo(data *nats.DeployAction) error {
 				return err
 			}
 
-			// TODO: if package remove failed don't delete deployment, save error
 			if data.Failed {
-				return m.Client.Deployment.Update().
+				query := m.Client.Deployment.Update().
 					SetUpdated(data.When).
-					SetFailed(data.Failed).
+					SetFailed(data.Failed)
+
+				if data.PackageBranch != "" {
+					query.SetBranch(data.PackageBranch)
+				}
+
+				if data.PackageBrewType != "" {
+					query.SetBrewType(data.PackageBrewType)
+				}
+
+				if data.PackageVerified {
+					query.SetVerified(data.PackageVerified)
+				}
+
+				return query.
 					Where(deployment.And(deployment.PackageID(data.PackageId), deployment.HasOwnerWith(agent.ID(data.AgentId)))).
 					Exec(context.Background())
 			} else {
@@ -115,6 +182,71 @@ func (m *Model) SaveWinGetDeployInfo(data nats.DeployAction) error {
 				SetUpdated(data.When).
 				Where(deployment.And(deployment.PackageID(data.PackageId), deployment.HasOwnerWith(agent.ID(data.AgentId)))).
 				Exec(context.Background())
+		}
+
+		if data.Action == "uninstall" {
+			_, err := m.Client.Deployment.Delete().
+				Where(deployment.And(deployment.PackageID(data.PackageId), deployment.HasOwnerWith(agent.ID(data.AgentId)))).
+				Exec(context.Background())
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	return nil
+}
+
+func (m *Model) SaveFlatpakOrBrewDeployInfo(data nats.DeployAction) error {
+
+	exists, err := m.Client.Deployment.Query().Where(deployment.PackageID(data.PackageId), deployment.HasOwnerWith(agent.ID(data.AgentId))).Exist(context.Background())
+	if err != nil {
+		return err
+	}
+
+	if !exists {
+		if data.Action == "install" {
+			query := m.Client.Deployment.Create().
+				SetOwnerID(data.AgentId).
+				SetPackageID(data.PackageId).
+				SetName(strings.TrimPrefix(data.PackageName, "Install ")).
+				SetInstalled(data.When).
+				SetUpdated(data.When).
+				SetByProfile(true)
+
+			if data.PackageBranch != "" {
+				query.SetBranch(data.PackageBranch)
+			}
+
+			if data.PackageBrewType != "" {
+				query.SetBrewType(data.PackageBrewType)
+			}
+
+			if data.PackageVerified {
+				query.SetVerified(data.PackageVerified)
+			}
+
+			return query.Exec(context.Background())
+		}
+	} else {
+		if data.Action == "update" {
+			query := m.Client.Deployment.Update().
+				SetUpdated(data.When).
+				Where(deployment.And(deployment.PackageID(data.PackageId), deployment.HasOwnerWith(agent.ID(data.AgentId))))
+
+			if data.PackageBranch != "" {
+				query.SetBranch(data.PackageBranch)
+			}
+
+			if data.PackageBrewType != "" {
+				query.SetBrewType(data.PackageBrewType)
+			}
+
+			if data.PackageVerified {
+				query.SetVerified(data.PackageVerified)
+			}
+
+			return query.Exec(context.Background())
 		}
 
 		if data.Action == "uninstall" {
